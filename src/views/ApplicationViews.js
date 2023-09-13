@@ -1,5 +1,6 @@
 import { Route, Routes, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Welcome } from "../components/welcome/Welcome";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -11,5 +12,20 @@ export const ApplicationViews = () => {
     setCurrentUser(giftUserObj);
   }, []);
 
-  return <div>Welcome!</div>;
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Outlet />
+            </>
+          }
+        >
+          <Route index element={<Welcome currentUser={currentUser} />} />
+        </Route>
+      </Routes>
+    </>
+  );
 };
