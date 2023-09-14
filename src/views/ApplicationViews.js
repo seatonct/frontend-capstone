@@ -25,7 +25,11 @@ export const ApplicationViews = () => {
           }
         >
           <Route index element={<Welcome />} />
-          <Route path="/NewWishList" element={<NewList />} />
+          <Route
+            path="/NewWishList"
+            currentUser={currentUser}
+            element={<NewList />}
+          />
         </Route>
       </Routes>
     </>
