@@ -1,6 +1,7 @@
 import { Route, Routes, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Welcome } from "../components/welcome/Welcome";
+import { NewList } from "../components/newList/NewList";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -23,7 +24,8 @@ export const ApplicationViews = () => {
             </>
           }
         >
-          <Route index element={<Welcome currentUser={currentUser} />} />
+          <Route index element={<Welcome />} />
+          <Route path="/NewWishList" element={<NewList />} />
         </Route>
       </Routes>
     </>
