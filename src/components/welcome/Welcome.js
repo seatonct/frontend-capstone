@@ -5,7 +5,7 @@ export const Welcome = () => {
     <div className="welcome-container">
       <h1>Welcome to Gift Grabber!</h1>
       <div>
-        Make someone's wishes a reality{" "}
+        Make someone's wishes come true{" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

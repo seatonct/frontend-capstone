@@ -7,7 +7,7 @@ export const NewList = ({ currentUser }) => {
   const [wishList, setWishList] = useState({
     name: "",
     typeId: 0,
-    creatorId: 0,
+    userId: 0,
   });
 
   const navigate = useNavigate();
@@ -21,14 +21,16 @@ export const NewList = ({ currentUser }) => {
   const updateList = (evt) => {
     const copy = { ...wishList };
     copy[evt.target.id] = evt.target.value;
-    copy.creatorId = currentUser.id;
+    copy.userId = currentUser.id;
     setWishList(copy);
   };
 
   const handleSave = (event) => {
     event.preventDefault();
-    saveNewList(wishList);
-    navigate("/");
+    const listCopy = { ...wishList };
+    listCopy.typeId = parseInt(listCopy.typeId);
+    saveNewList(listCopy);
+    navigate("/myLists");
   };
 
   return (
