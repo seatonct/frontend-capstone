@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getAllListTypes } from "../../services/wishListService";
+import { getAllListTypes, saveNewList } from "../../services/wishListService";
+import { useNavigate } from "react-router-dom";
 
 export const NewList = ({ currentUser }) => {
   const [listTypes, setListTypes] = useState([]);
@@ -8,6 +9,8 @@ export const NewList = ({ currentUser }) => {
     typeId: 0,
     creatorId: 0,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllListTypes().then((typesArray) => {
@@ -22,8 +25,14 @@ export const NewList = ({ currentUser }) => {
     setWishList(copy);
   };
 
+  const handleSave = (event) => {
+    event.preventDefault();
+    saveNewList(wishList);
+    navigate("/");
+  };
+
   return (
-    <>
+    <form onSubmit={handleSave}>
       <h1>New Wish List</h1>
       <div className="mb-3">
         <label htmlFor="formGroupExampleInput" className="form-label">
@@ -59,10 +68,10 @@ export const NewList = ({ currentUser }) => {
             );
           })}
         </select>
-        <button type="button" className="btn btn-primary btn-lg">
+        <button type="button submit" className="btn btn-primary btn-lg">
           Create List
         </button>
       </div>
-    </>
+    </form>
   );
 };
