@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAllListTypes } from "../../services/wishListService";
 
-export const NewList = () => {
-  const currentUser = localStorage.getItem("gift_user");
-  const idNum = currentUser.id;
+export const NewList = ({ currentUser }) => {
   const [listTypes, setListTypes] = useState([]);
   const [wishList, setWishList] = useState({
     name: "",
     typeId: 0,
-    creatorId: idNum,
+    creatorId: 0,
   });
 
   useEffect(() => {
@@ -20,6 +18,7 @@ export const NewList = () => {
   const updateList = (evt) => {
     const copy = { ...wishList };
     copy[evt.target.id] = evt.target.value;
+    copy.creatorId = currentUser.id;
     setWishList(copy);
   };
 
