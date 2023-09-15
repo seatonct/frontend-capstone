@@ -27,8 +27,7 @@ export const ApplicationViews = () => {
           <Route index element={<Welcome />} />
           <Route
             path="/NewWishList"
-            currentUser={currentUser}
-            element={<NewList />}
+            element={<NewList currentUser={currentUser} />}
           />
         </Route>
       </Routes>
