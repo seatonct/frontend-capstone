@@ -1,10 +1,10 @@
-export const getUserByEmail = (email) => {
+export const getUserByEmail = async (email) => {
   return fetch(`http://localhost:8088/users?email=${email}`).then((res) =>
     res.json()
   );
 };
 
-export const createUser = (user) => {
+export const createUser = async (user) => {
   return fetch("http://localhost:8088/users", {
     method: "POST",
     headers: {

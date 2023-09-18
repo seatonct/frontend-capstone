@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Welcome } from "../components/welcome/Welcome";
 import { NewList } from "../components/newList/NewList";
 import { MyLists } from "../components/myLists/MyLists";
+import { NavBar } from "../components/nav/NavBar";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -21,6 +22,7 @@ export const ApplicationViews = () => {
           path="/"
           element={
             <>
+              <NavBar />
               <Outlet />
             </>
           }

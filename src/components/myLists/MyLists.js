@@ -15,25 +15,23 @@ export const MyLists = ({ currentUser }) => {
 
   useEffect(() => {
     getAndSetMyLists();
-  }, []);
-
-  const handleDelete = () => {};
+  }, [myLists]);
 
   return (
     <>
       {myLists.map((listObj) => {
         return (
-          <div className="wishList">
-            <span listId={listObj.id}>{listObj.name}</span>
+          <div key={listObj.id} className="wishList">
+            <span>{listObj.name}</span>
             <span>Type: {listObj.type.name} List</span>
             <button
-              listId={listObj.id}
               onClick={async () => {
                 await deleteList(listObj);
                 getAndSetMyLists();
               }}
             >
-              Delete List
+              {" "}
+              Delete
             </button>
           </div>
         );
