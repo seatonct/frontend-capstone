@@ -9,12 +9,12 @@ export const NavBar = () => {
         </Link>
       </li>
       <li className="navbar_item">
-        <Link className="navbar_link" to="/newWishList">
+        <Link className="navbar_link" to="/lists/newWishList">
           New Wish List
         </Link>
       </li>
       <li className="navbar_item">
-        <Link className="navbar_link" to="/myLists">
+        <Link className="navbar_link" to="/lists/myLists">
           My Wish Lists
         </Link>
       </li>
