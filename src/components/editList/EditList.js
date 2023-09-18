@@ -42,7 +42,7 @@ export const EditWishList = ({ currentUser }) => {
 
   return (
     <form onSubmit={handleSave}>
-      <h1>Edit Wish List</h1>
+      <h2>Edit Wish List</h2>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Wish List Name:
