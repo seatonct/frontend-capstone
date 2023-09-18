@@ -4,6 +4,8 @@ import { Welcome } from "../components/welcome/Welcome";
 import { NewList } from "../components/newList/NewList";
 import { MyLists } from "../components/myLists/MyLists";
 import { NavBar } from "../components/nav/NavBar";
+import { EditWishList } from "../components/editList/EditList";
+import { ListDetails } from "../components/listDetails/ListDetails";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,14 +30,24 @@ export const ApplicationViews = () => {
           }
         >
           <Route index element={<Welcome />} />
-          <Route
-            path="/newWishList"
-            element={<NewList currentUser={currentUser} />}
-          />
-          <Route
-            path="/myLists"
-            element={<MyLists currentUser={currentUser} />}
-          />
+          <Route path="lists">
+            <Route
+              path="newWishList"
+              element={<NewList currentUser={currentUser} />}
+            />
+            <Route
+              path="myLists"
+              element={<MyLists currentUser={currentUser} />}
+            />
+            <Route
+              path=":listId"
+              element={<ListDetails currentUser={currentUser} />}
+            />
+            <Route
+              path=":listId/edit"
+              element={<EditWishList currentUser={currentUser} />}
+            />
+          </Route>
         </Route>
       </Routes>
     </>

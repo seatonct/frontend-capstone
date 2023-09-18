@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { getAllListTypes, saveNewList } from "../../services/wishListService";
-import { useNavigate } from "react-router-dom";
+import {
+  editList,
+  getAllListTypes,
+  getListById,
+} from "../../services/wishListService";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const NewList = ({ currentUser }) => {
+export const EditWishList = ({ currentUser }) => {
   const [listTypes, setListTypes] = useState([]);
-  const [wishList, setWishList] = useState({
-    name: "",
-    typeId: 0,
-    userId: 0,
-  });
+  const [wishList, setWishList] = useState({});
 
+  const { listId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,45 +19,63 @@ export const NewList = ({ currentUser }) => {
     });
   }, []);
 
-  const updateList = (evt) => {
-    const copy = { ...wishList };
-    copy[evt.target.id] = evt.target.value;
-    copy.userId = currentUser.id;
-    setWishList(copy);
-  };
+  useEffect(() => {
+    getListById(listId).then((listObj) => {
+      setWishList(listObj);
+    });
+  }, [listId]);
 
   const handleSave = (event) => {
     event.preventDefault();
-    const listCopy = { ...wishList };
-    listCopy.typeId = parseInt(listCopy.typeId);
-    saveNewList(listCopy);
-    navigate("/lists/myLists");
+
+    const updatedList = {
+      id: wishList.id,
+      name: wishList.name,
+      typeId: wishList.typeId,
+      userId: wishList.userId,
+    };
+
+    editList(updatedList).then(() => {
+      navigate("/lists/myLists");
+    });
   };
 
   return (
     <form onSubmit={handleSave}>
-      <h1>New Wish List</h1>
+      <h1>Edit Wish List</h1>
       <div className="mb-3">
-        <label htmlFor="formGroupExampleInput" className="form-label">
+        <label htmlFor="name" className="form-label">
           Wish List Name:
         </label>
         <input
+          name="name"
+          value={wishList.name}
           type="text"
           className="form-control"
           id="name"
           placeholder="Enter a name for your list"
-          onChange={updateList}
+          onChange={(event) => {
+            const listCopy = { ...wishList };
+            listCopy.name = event.target.value;
+            setWishList(listCopy);
+          }}
         ></input>
       </div>
       <div className="mb-3">
-        <label htmlFor="formGroupExampleInput2" className="form-label">
+        <label htmlFor="typeId" className="form-label">
           Wish List Type:
         </label>
         <select
+          name="typeId"
+          value={wishList.typeId}
           className="form-select"
           aria-label="Default select example"
           id="typeId"
-          onChange={updateList}
+          onChange={(event) => {
+            const listCopy = { ...wishList };
+            listCopy.typeId = parseInt(event.target.value);
+            setWishList(listCopy);
+          }}
           required
         >
           <option defaultValue value="0" key="0">
@@ -71,7 +90,7 @@ export const NewList = ({ currentUser }) => {
           })}
         </select>
         <button type="button submit" className="btn btn-primary btn-lg">
-          Create List
+          Save Changes
         </button>
       </div>
     </form>
