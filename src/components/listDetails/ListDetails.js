@@ -17,7 +17,7 @@ export const ListDetails = ({ currentUser }) => {
   if (currentUser.id === list.userId) {
     return (
       <>
-        <h1>
+        <h2>
           <span>{list.name}</span>
           <button
             onClick={() => {
@@ -26,13 +26,14 @@ export const ListDetails = ({ currentUser }) => {
           >
             Edit
           </button>
-        </h1>
+        </h2>
+        <h3>List Type: </h3>
       </>
     );
   } else {
     return (
       <>
-        <h1>{list.name}</h1>
+        <h2>{list.name}</h2>
       </>
     );
   }

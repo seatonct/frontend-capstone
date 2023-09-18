@@ -20,6 +20,7 @@ export const MyLists = ({ currentUser }) => {
 
   return (
     <>
+      <h2>My Wish Lists</h2>
       {myLists.map((listObj) => {
         if (currentUser.id === listObj.userId) {
           return (

@@ -35,5 +35,7 @@ export const editList = async (list) => {
 };
 
 export const getListById = async (id) => {
-  return fetch(`http://localhost:8088/lists/${id}`).then((res) => res.json());
+  return fetch(`http://localhost:8088/lists/${id}?_expand=type`).then((res) =>
+    res.json()
+  );
 };
