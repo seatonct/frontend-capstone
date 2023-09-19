@@ -7,6 +7,7 @@ import { NavBar } from "../components/nav/NavBar";
 import { EditWishList } from "../components/editList/EditList";
 import { ListDetails } from "../components/listDetails/ListDetails";
 import { NewItem } from "../components/newItem/NewItem";
+import { EditItem } from "../components/editItem/EditItem";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -49,6 +50,9 @@ export const ApplicationViews = () => {
               element={<EditWishList currentUser={currentUser} />}
             />
             <Route path=":listId/newItem" element={<NewItem />} />
+          </Route>
+          <Route path="items">
+            <Route path=":itemId/edit" element={<EditItem />} />
           </Route>
         </Route>
       </Routes>
