@@ -52,7 +52,13 @@ export const ListDetails = ({ currentUser }) => {
             return (
               <div>
                 {item.name}
-                <button>Edit Item</button>
+                <button
+                  onClick={() => {
+                    navigate(`/items/${item.id}/edit`);
+                  }}
+                >
+                  Edit Item
+                </button>
                 <button
                   onClick={async () => {
                     await deleteItem(item);
