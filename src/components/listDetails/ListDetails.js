@@ -50,7 +50,7 @@ export const ListDetails = ({ currentUser }) => {
         <div>
           {listItems.map((item) => {
             return (
-              <div>
+              <div key={item.id}>
                 {item.name}
                 <button
                   onClick={() => {
@@ -80,7 +80,7 @@ export const ListDetails = ({ currentUser }) => {
         <h3>List Type: {list.type?.name}</h3>
         <div>
           {listItems.map((item) => {
-            return <div>{item.name}</div>;
+            return <div key={item.id}>{item.name}</div>;
           })}
         </div>
       </>
