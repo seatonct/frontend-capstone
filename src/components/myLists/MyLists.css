@@ -1,0 +1,24 @@
+.my-lists {
+  margin: 2rem auto;
+  width: 90%;
+  text-align: left;
+  padding: 3rem 3rem;
+  border: 1px solid var(--outline);
+  background-color: #fed700;
+  border-radius: 0.5rem;
+}
+
+.wishList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+}

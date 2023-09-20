@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllListTypes, saveNewList } from "../../services/wishListService";
 import { useNavigate } from "react-router-dom";
+import "./NewList.css";
 
 export const NewList = ({ currentUser }) => {
   const [listTypes, setListTypes] = useState([]);
