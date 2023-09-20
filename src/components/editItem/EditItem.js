@@ -31,10 +31,12 @@ export const EditItem = () => {
       storeUrl: item.storeUrl,
       listId: item.listId,
       claimed: item.claimed,
+      id: item.id,
     };
 
-    editItem(updatedItem);
-    navigate(`/lists/${item.listId}`);
+    editItem(updatedItem).then(() => {
+      navigate(`/lists/${item.listId}`);
+    });
   };
 
   return (
