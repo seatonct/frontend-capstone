@@ -1,0 +1,38 @@
+.list-details {
+  margin: 2rem auto;
+  width: 90%;
+  text-align: left;
+  padding: 3rem 3rem;
+  border: 1px solid var(--outline);
+  background-color: #fed700;
+  border-radius: 0.5rem;
+}
+
+.title-div {
+  display: flex;
+}
+
+.list-header {
+  margin-bottom: 1rem;
+}
+
+.add-btn {
+  margin-bottom: 1rem;
+}
+
+.item-div {
+  margin-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bi-pencil-fill {
+  margin-left: 1rem;
+}
+
+.bi-trash3-fill {
+  margin-left: 1rem;
+}

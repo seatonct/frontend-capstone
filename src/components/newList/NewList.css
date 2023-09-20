@@ -1,0 +1,14 @@
+.form-container {
+  margin: 2rem auto;
+  width: 80%;
+  text-align: left;
+  padding: 5rem 3rem;
+  border: 1px solid var(--outline);
+  background-color: #fed700;
+  border-radius: 0.5rem;
+}
+
+.btn {
+  background-color: #21b0fe;
+  margin: 2rem auto;
+}
