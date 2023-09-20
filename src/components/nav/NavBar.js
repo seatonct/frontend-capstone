@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+
   return (
     <ul className="navbar">
       <li className="navbar_item">
@@ -18,6 +21,22 @@ export const NavBar = () => {
           My Wish Lists
         </Link>
       </li>
+      {localStorage.getItem("gift_user") ? (
+        <li className="navbar_item navbar-logout">
+          <Link
+            className="navbar_link"
+            to=""
+            onClick={() => {
+              localStorage.removeItem("gift_user");
+              navigate("/", { replace: true });
+            }}
+          >
+            Logout
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
     </ul>
   );
 };
