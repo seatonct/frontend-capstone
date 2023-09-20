@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// import { CurrencyInput} from "react-currency-input-field";
 import { saveNewItem } from "../../services/itemService";
 
 export const NewItem = () => {
@@ -62,14 +61,6 @@ export const NewItem = () => {
         <label htmlFor="price" className="form-label">
           Price:
         </label>
-        {/* <CurrencyInput
-          id="priceInput"
-          name="price"
-          placeholder="Enter a price for the item"
-          prefix="$"
-          decimalsLimit={2}
-          onValueChange={updateItem}
-        /> */}
         <input
           id="price"
           type="text"
