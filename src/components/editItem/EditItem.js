@@ -50,7 +50,7 @@ export const EditItem = () => {
           id="name"
           type="text"
           className="form-control"
-          value={item.name}
+          value={item.name ? item.name : ""}
           placeholder="Enter a name for the item"
           onChange={updateItem}
           required
@@ -63,7 +63,7 @@ export const EditItem = () => {
         <input
           id="description"
           type="text"
-          value={item.description}
+          value={item.description ? item.description : ""}
           className="form-control"
           placeholder="Enter a description of the item"
           onChange={updateItem}
@@ -76,7 +76,7 @@ export const EditItem = () => {
         <input
           id="price"
           type="text"
-          value={item.price}
+          value={item.price ? item.price : ""}
           className="form-control"
           placeholder="Example: $1000.00"
           onChange={updateItem}
@@ -89,7 +89,7 @@ export const EditItem = () => {
         <input
           id="imageUrl"
           type="text"
-          value={item.imageUrl}
+          value={item.imageUrl ? item.imageUrl : ""}
           className="form-control"
           placeholder="Example: http://www.imageurl.com/image"
           onChange={updateItem}
@@ -102,7 +102,7 @@ export const EditItem = () => {
         <input
           id="storeUrl"
           type="text"
-          value={item.storeUrl}
+          value={item.storeUrl ? item.storeUrl : ""}
           className="form-control"
           placeholder="Example: http://www.amazon.com/product"
           onChange={updateItem}

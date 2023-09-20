@@ -21,7 +21,6 @@ export const Register = (props) => {
           "gift_user",
           JSON.stringify({
             id: createdUser.id,
-            // staff: createdUser.isStaff,
           })
         );
 

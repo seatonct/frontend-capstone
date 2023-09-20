@@ -49,7 +49,7 @@ export const EditWishList = ({ currentUser }) => {
         </label>
         <input
           name="name"
-          value={wishList.name}
+          value={wishList.name ? wishList.name : ""}
           type="text"
           className="form-control"
           id="name"
