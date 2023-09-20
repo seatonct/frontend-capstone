@@ -29,7 +29,7 @@ export const Login = () => {
   };
 
   return (
-    <main className="auth-container">
+    <main className="auth-container form-container">
       <section>
         <form className="auth-form" onSubmit={handleLogin}>
           <h1 className="header">Gift Grabber</h1>

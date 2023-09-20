@@ -40,7 +40,7 @@ export const EditItem = () => {
   };
 
   return (
-    <form onSubmit={handleSave}>
+    <form className="form-container" onSubmit={handleSave}>
       <h2>Edit Item</h2>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
