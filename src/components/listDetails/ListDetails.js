@@ -28,7 +28,7 @@ export const ListDetails = ({ currentUser }) => {
 
   if (currentUser.id === list.userId) {
     return (
-      <>
+      <div className="list-details">
         <h2>
           <span>{list.name}</span>
           <button
@@ -71,7 +71,7 @@ export const ListDetails = ({ currentUser }) => {
             );
           })}
         </div>
-      </>
+      </div>
     );
   } else {
     return (

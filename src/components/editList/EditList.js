@@ -41,7 +41,7 @@ export const EditWishList = ({ currentUser }) => {
   };
 
   return (
-    <form onSubmit={handleSave}>
+    <form className="form-container" onSubmit={handleSave}>
       <h2>Edit Wish List</h2>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">

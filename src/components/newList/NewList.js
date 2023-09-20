@@ -34,7 +34,7 @@ export const NewList = ({ currentUser }) => {
   };
 
   return (
-    <form onSubmit={handleSave}>
+    <form className="form-container" onSubmit={handleSave}>
       <h2>New Wish List</h2>
       <div className="mb-3">
         <label htmlFor="formGroupExampleInput" className="form-label">
