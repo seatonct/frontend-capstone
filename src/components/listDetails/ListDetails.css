@@ -13,6 +13,10 @@
 }
 
 .list-header {
+  margin-bottom: 0.5rem;
+  background-color: #fe218b;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
   margin-bottom: 1rem;
 }
 
@@ -29,10 +33,14 @@
   justify-content: space-between;
 }
 
-.bi-pencil-fill {
+/* .bi-pencil-fill {
   margin-left: 1rem;
 }
 
 .bi-trash3-fill {
   margin-left: 1rem;
+} */
+
+.item-name {
+  width: 36%;
 }
