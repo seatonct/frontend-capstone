@@ -22,3 +22,17 @@ h2 {
   margin-bottom: 2rem;
   text-align: center;
 }
+
+.list-name {
+  width: 40%;
+  margin-right: 5%;
+}
+
+.list-type {
+  width: 40%;
+  margin-right: 5%;
+}
+
+.delete-btn-div {
+  width: 10%;
+}

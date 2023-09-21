@@ -17,7 +17,7 @@ export const MyLists = ({ currentUser }) => {
 
   useEffect(() => {
     getAndSetMyLists();
-  }, [myLists]);
+  }, []);
 
   return (
     <div className="my-lists">
