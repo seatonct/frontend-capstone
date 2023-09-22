@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editItem, getItemById } from "../../services/itemService";
+import "./EditItem.css";
 
 export const EditItem = () => {
   const [item, setItem] = useState({});
