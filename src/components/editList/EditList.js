@@ -5,6 +5,7 @@ import {
   getListById,
 } from "../../services/wishListService";
 import { useNavigate, useParams } from "react-router-dom";
+import "./EditList.css";
 
 export const EditWishList = ({ currentUser }) => {
   const [listTypes, setListTypes] = useState([]);

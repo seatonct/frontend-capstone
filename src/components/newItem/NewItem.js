@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { saveNewItem } from "../../services/itemService";
+import "./NewItem.css";
 
 export const NewItem = () => {
   const [item, setItem] = useState({

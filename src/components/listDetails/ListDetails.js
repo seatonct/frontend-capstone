@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getListById } from "../../services/wishListService";
-import { deleteItem, getListItems } from "../../services/itemService";
+import {
+  deleteItem,
+  getListItems,
+  toggleItemClaimed,
+  toggleItemUnclaimed,
+} from "../../services/itemService";
 import "./ListDetails.css";
+import {
+  createClaim,
+  getClaimsByUserId,
+  deleteClaim,
+} from "../../services/claimService";
 
 export const ListDetails = ({ currentUser }) => {
   const [list, setList] = useState({});
   const [listItems, setListItems] = useState([]);
+  const [userClaims, setUserClaims] = useState([]);
 
   const { listId } = useParams();
   const navigate = useNavigate();
@@ -14,6 +25,12 @@ export const ListDetails = ({ currentUser }) => {
   const getAndSetListItems = () => {
     getListById(listId).then((listObj) => {
       setList(listObj);
+    });
+  };
+
+  const getAndSetUserClaims = () => {
+    getClaimsByUserId(currentUser.id).then((claimsArray) => {
+      setUserClaims(claimsArray);
     });
   };
 
@@ -26,6 +43,10 @@ export const ListDetails = ({ currentUser }) => {
       setListItems(itemsArray);
     });
   }, [list]);
+
+  useEffect(() => {
+    getAndSetUserClaims();
+  }, []);
 
   if (currentUser.id === list.userId) {
     return (
@@ -65,6 +86,70 @@ export const ListDetails = ({ currentUser }) => {
               <div className="item-div" key={item.id}>
                 <span className="item-name">{item.name}</span>
                 <span className="item-price">{item.price}</span>
+                {item.claimed ? (
+                  <div className="claimed-icon">
+                    Claimed
+                    {userClaims.find((claim) => claim.itemId === item.id) ? (
+                      <>
+                        <span> by you</span>
+                        <span>
+                          <svg
+                            onClick={() => {
+                              deleteClaim(
+                                userClaims.find(
+                                  (claim) => claim.itemId === item.id
+                                )
+                              ).then(() => {
+                                toggleItemUnclaimed(item.id);
+                              });
+                            }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-arrow-counterclockwise"
+                            viewBox="0 0 16 16"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+                            />
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                          </svg>
+                        </span>
+                      </>
+                    ) : (
+                      <> by </>
+                    )}
+                  </div>
+                ) : (
+                  <div className="claim-icon">
+                    <svg
+                      onClick={() => {
+                        const newClaim = {
+                          itemId: item.id,
+                          userId: currentUser.id,
+                        };
+
+                        createClaim(newClaim).then(() => {
+                          toggleItemClaimed(item.id);
+                        });
+                      }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-bag-plus-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"
+                      />
+                    </svg>
+                  </div>
+                )}
+
                 <div className="edit-icon">
                   <svg
                     onClick={() => {
@@ -113,8 +198,23 @@ export const ListDetails = ({ currentUser }) => {
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
-                <span className="item-name">{item.name}</span>
-                <span className="item-price">{item.price}</span>
+                <span className="item-name-viewer">{item.name}</span>
+                <span className="item-price-viewer">{item.price}</span>
+                <div className="claim-icon-viewer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-bag-plus-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"
+                    />
+                  </svg>
+                </div>
               </div>
             );
           })}

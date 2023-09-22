@@ -4,7 +4,7 @@
   text-align: left;
   padding: 3rem 3rem;
   border: 1px solid var(--outline);
-  background-color: #fed700;
+  background-color: #a8dadc;
   border-radius: 0.5rem;
 }
 
@@ -14,7 +14,7 @@
 
 .list-header {
   margin-bottom: 0.5rem;
-  background-color: #fe218b;
+  background-color: #f1faee;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
@@ -26,7 +26,7 @@
 
 .item-div {
   margin-bottom: 0.5rem;
-  background-color: white;
+  background-color: #f1faee;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   display: flex;
@@ -42,5 +42,38 @@
 } */
 
 .item-name {
-  width: 36%;
+  width: 44%;
+}
+
+.item-price {
+  width: 12%;
+  margin-left: 5%;
+}
+
+.claim-icon {
+  width: 14%;
+  margin-left: 15%;
+}
+
+.edit-icon {
+  width: 4%;
+  margin-left: 5%;
+}
+
+.delete-icon {
+  width: 4%;
+  margin-left: 5%;
+}
+
+.item-name-viewer {
+  width: 40%;
+}
+
+.item-price-viewer {
+  width: 40%;
+  margin-left: 5%;
+}
+
+.claim-icon-viewer {
+  width: 10%;
 }

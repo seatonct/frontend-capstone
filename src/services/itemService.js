@@ -35,3 +35,29 @@ export const deleteItem = (item) => {
     method: "DELETE",
   }).then((res) => res.json());
 };
+
+export const toggleItemClaimed = (itemId) => {
+  return fetch(`http://localhost:8088/items/${itemId}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      claimed: true,
+    }),
+  }).then((res) => res.json());
+};
+
+export const toggleItemUnclaimed = (itemId) => {
+  return fetch(`http://localhost:8088/items/${itemId}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      claimed: false,
+    }),
+  }).then((res) => res.json());
+};
