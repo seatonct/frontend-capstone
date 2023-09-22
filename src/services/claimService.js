@@ -1,4 +1,4 @@
-export const createClaim = (claim) => {
+export const createClaim = async (claim) => {
   return fetch(`http://localhost:8088/claims`, {
     method: "POST",
     headers: {
@@ -8,10 +8,9 @@ export const createClaim = (claim) => {
   });
 };
 
-export const getClaimsByUserId = (userId) => {
-  return fetch(`http://localhost:8088/claims?userId=${userId}`).then((res) =>
-    res.json()
-  );
+export const getClaimsByUserId = async (userId) => {
+  const res = await fetch(`http://localhost:8088/claims?userId=${userId}`);
+  return await res.json();
 };
 
 // export const getClaimsByItemId = (itemId) => {
@@ -20,7 +19,7 @@ export const getClaimsByUserId = (userId) => {
 //   );
 // };
 
-export const deleteClaim = (claim) => {
+export const deleteClaim = async (claim) => {
   return fetch(`http://localhost:8088/claims/${claim.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
