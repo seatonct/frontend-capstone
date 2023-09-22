@@ -53,16 +53,19 @@
 .claim-icon {
   width: 14%;
   margin-left: 15%;
+  text-align: right;
 }
 
 .edit-icon {
   width: 4%;
   margin-left: 5%;
+  text-align: right;
 }
 
 .delete-icon {
   width: 4%;
   margin-left: 5%;
+  text-align: right;
 }
 
 .item-name-viewer {

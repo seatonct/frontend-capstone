@@ -14,10 +14,9 @@ export const saveNewItem = async (item) => {
   }).then((res) => res.json());
 };
 
-export const getItemById = (itemId) => {
-  return fetch(`http://localhost:8088/items/${itemId}`).then((res) =>
-    res.json()
-  );
+export const getItemById = async (itemId) => {
+  const res = await fetch(`http://localhost:8088/items/${itemId}`);
+  return await res.json();
 };
 
 export const editItem = async (item) => {
@@ -36,7 +35,7 @@ export const deleteItem = (item) => {
   }).then((res) => res.json());
 };
 
-export const toggleItemClaimed = (itemId) => {
+export const toggleItemClaimed = async (itemId) => {
   return fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
@@ -49,8 +48,8 @@ export const toggleItemClaimed = (itemId) => {
   }).then((res) => res.json());
 };
 
-export const toggleItemUnclaimed = (itemId) => {
-  return fetch(`http://localhost:8088/items/${itemId}`, {
+export const toggleItemUnclaimed = async (itemId) => {
+  const res = await fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -59,5 +58,7 @@ export const toggleItemUnclaimed = (itemId) => {
     body: JSON.stringify({
       claimed: false,
     }),
-  }).then((res) => res.json());
+  });
+
+  await res.json();
 };
