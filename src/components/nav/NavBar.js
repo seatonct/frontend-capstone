@@ -22,6 +22,11 @@ export const NavBar = () => {
           My Wish Lists
         </Link>
       </li>
+      <li className="navbar_item">
+        <Link className="navbar_link" to="/lists/findList">
+          Find Wish List
+        </Link>
+      </li>
       {localStorage.getItem("gift_user") ? (
         <li className="navbar_item navbar-logout">
           <Link
