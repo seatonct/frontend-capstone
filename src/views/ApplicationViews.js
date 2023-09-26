@@ -9,6 +9,7 @@ import { ListDetails } from "../components/listDetails/ListDetails";
 import { NewItem } from "../components/newItem/NewItem";
 import { EditItem } from "../components/editItem/EditItem";
 import { FindList } from "../components/findList/FindList";
+import { ShoppingList } from "../components/shoppingList/ShoppingList";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -56,6 +57,10 @@ export const ApplicationViews = () => {
           <Route path="items">
             <Route path=":itemId/edit" element={<EditItem />} />
           </Route>
+          <Route
+            path="/shoppingList"
+            element={<ShoppingList currentUser={currentUser} />}
+          ></Route>
         </Route>
       </Routes>
     </>
