@@ -20,9 +20,15 @@ export const FindList = () => {
     });
   }, [user]);
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    findUser();
+  };
+
   return (
     <>
-      <form className="form-container" onSubmit={findUser}>
+      <form className="form-container" onSubmit={handleSearch}>
         <div className="mb-3">
           <h2>Find a List</h2>
           <label htmlFor="formGroupExampleInput" className="form-label">
@@ -43,6 +49,17 @@ export const FindList = () => {
           </button>
         </div>
       </form>
+      {lists.length > 0 && (
+        <div className="search-results">
+          {lists.map((list) => {
+            return (
+              <div className="search-result" key={list.id}>
+                {list.name}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
