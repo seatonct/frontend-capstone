@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { getUserByEmail } from "../../services/userService";
 import { getWishListsByUserId } from "../../services/wishListService";
 import "./FindList.css";
@@ -15,7 +16,7 @@ export const FindList = () => {
   };
 
   useEffect(() => {
-    getWishListsByUserId(user.id).then((res) => {
+    getWishListsByUserId(user?.id).then((res) => {
       setLists(res);
     });
   }, [user]);
@@ -51,10 +52,14 @@ export const FindList = () => {
       </form>
       {lists.length > 0 && (
         <div className="search-results">
+          <h3>Search Results:</h3>
           {lists.map((list) => {
             return (
               <div className="search-result" key={list.id}>
-                {list.name}
+                <Link className="list-name" to={`/lists/${list.id}`}>
+                  {list.name}
+                </Link>
+                <span className="list-type">Type: {list.type.name} List</span>
               </div>
             );
           })}
