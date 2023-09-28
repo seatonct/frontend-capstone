@@ -1,9 +1,9 @@
 .navbar {
-  background-color: #a8dadc;
+  background-color: #f1faee;
 }
 
 .navbar_item {
-  flex-basis: 20%;
+  flex-basis: 15%;
   list-style-type: none;
   text-align: center;
   margin: auto;
