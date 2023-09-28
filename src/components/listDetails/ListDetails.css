@@ -2,48 +2,35 @@
   margin: 2rem auto;
   width: 90%;
   text-align: left;
-  padding: 3rem 3rem;
-  border: 1px solid var(--outline);
-  /* background-color: #a8dadc; */
-  border-radius: 0.5rem;
-}
-
-.title-div {
-  display: flex;
-}
-
-.list-header {
-  margin-bottom: 0.5rem;
-  /* background-color: #f1faee; */
-  border-radius: 0.5rem;
   padding: 1rem 1rem;
-  margin-bottom: 1rem;
+  border: 1px solid var(--outline);
+  border-radius: 0.5rem;
 }
 
-.list-edit-icon {
+h2 {
+  margin-bottom: 0;
+}
+
+.edit-list-icon {
   margin-left: 1rem;
+  font-size: 2rem;
+  color: #f1faee;
 }
 
-.add-btn {
-  margin-bottom: 1rem;
+.btn-div {
+  margin: 0 0 1rem;
+  padding: 0 0 0 5%;
 }
 
 .item-div {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0 0.5rem;
   background-color: #f1faee;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-
-/* .bi-pencil-fill {
-  margin-left: 1rem;
-}
-
-.bi-trash3-fill {
-  margin-left: 1rem;
-} */
 
 .item-name {
   width: 35%;
@@ -54,22 +41,30 @@
   margin-left: 5%;
 }
 
-.claim-icon {
+.claim-icon-div {
   width: 20%;
   margin-left: 5%;
   text-align: right;
 }
 
+.edit-icon-div {
+  width: 5%;
+  margin-left: 5%;
+  text-align: right;
+}
+
 .edit-icon {
+  font-size: 1.5rem;
+}
+
+.delete-icon-div {
   width: 5%;
   margin-left: 5%;
   text-align: right;
 }
 
 .delete-icon {
-  width: 5%;
-  margin-left: 5%;
-  text-align: right;
+  font-size: 1.5rem;
 }
 
 .item-name-viewer {
@@ -77,10 +72,10 @@
 }
 
 .item-price-viewer {
-  width: 40%;
+  width: 10%;
   margin-left: 5%;
 }
 
 .claim-icon-viewer {
-  width: 10%;
+  width: 20%;
 }
