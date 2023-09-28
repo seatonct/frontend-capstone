@@ -9,27 +9,27 @@ export const NavBar = () => {
     <ul className="navbar">
       <li className="navbar_item">
         <Link className="navbar_link" to="/">
-          Home
+          <i className="fa-solid fa-house"></i>
         </Link>
       </li>
       <li className="navbar_item">
         <Link className="navbar_link" to="/lists/newWishList">
-          New Wish List
+          <i className="fa-solid fa-file-circle-plus"></i>
         </Link>
       </li>
       <li className="navbar_item">
         <Link className="navbar_link" to="/lists/myLists">
-          My Wish Lists
+          <i className="fa-solid fa-list"></i>
         </Link>
       </li>
       <li className="navbar_item">
         <Link className="navbar_link" to="/lists/findList">
-          Find Wish List
+          <i className="fa-solid fa-magnifying-glass"></i>
         </Link>
       </li>
       <li className="navbar_item">
         <Link className="navbar_link" to="/shoppingList">
-          ShoppingList
+          <i className="fa-solid fa-cart-shopping"></i>
         </Link>
       </li>
       {localStorage.getItem("gift_user") ? (
