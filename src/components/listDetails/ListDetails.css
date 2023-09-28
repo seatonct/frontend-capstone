@@ -4,7 +4,7 @@
   text-align: left;
   padding: 3rem 3rem;
   border: 1px solid var(--outline);
-  background-color: #a8dadc;
+  /* background-color: #a8dadc; */
   border-radius: 0.5rem;
 }
 
@@ -14,7 +14,7 @@
 
 .list-header {
   margin-bottom: 0.5rem;
-  background-color: #f1faee;
+  /* background-color: #f1faee; */
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
@@ -46,28 +46,28 @@
 } */
 
 .item-name {
-  width: 44%;
+  width: 35%;
 }
 
 .item-price {
-  width: 12%;
+  width: 5%;
   margin-left: 5%;
 }
 
 .claim-icon {
-  width: 14%;
-  margin-left: 15%;
+  width: 20%;
+  margin-left: 5%;
   text-align: right;
 }
 
 .edit-icon {
-  width: 4%;
+  width: 5%;
   margin-left: 5%;
   text-align: right;
 }
 
 .delete-icon {
-  width: 4%;
+  width: 5%;
   margin-left: 5%;
   text-align: right;
 }

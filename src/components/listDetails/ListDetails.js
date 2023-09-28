@@ -92,7 +92,7 @@ export const ListDetails = ({ currentUser }) => {
                 <span className="item-name">{item.name}</span>
                 <span className="item-price">{item.price}</span>
                 {item.claimed ? (
-                  <div className="claimed-icon">
+                  <div className="claim-icon">
                     Claimed
                     {userClaims.find((claim) => claim.itemId === item.id) ? (
                       <>
@@ -134,6 +134,7 @@ export const ListDetails = ({ currentUser }) => {
                       onClick={async () => {
                         const newClaim = {
                           itemId: item.id,
+                          listId: parseInt(item.listId),
                           userId: user.id,
                         };
 
@@ -209,7 +210,7 @@ export const ListDetails = ({ currentUser }) => {
                 <span className="item-name-viewer">{item.name}</span>
                 <span className="item-price-viewer">{item.price}</span>
                 {item.claimed ? (
-                  <div className="claimed-icon">
+                  <div className="claim-icon">
                     Claimed
                     {userClaims.find((claim) => claim.itemId === item.id) ? (
                       <>

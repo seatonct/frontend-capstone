@@ -1,0 +1,35 @@
+h2 {
+  color: #f1faee;
+}
+
+.item-div {
+  margin-bottom: 0.5rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #f1faee;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.item-name {
+  width: 30%;
+}
+
+.item-price {
+  width: 5%;
+  margin-left: 5%;
+}
+
+.item-list {
+  width: 30%;
+  margin-left: 5%;
+}
+
+.claim-icon {
+  width: 20%;
+  margin-left: 5%;
+  text-align: right;
+}
