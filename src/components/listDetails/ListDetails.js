@@ -157,7 +157,7 @@ export const ListDetails = ({ currentUser }) => {
           <h2>{list.name}</h2>
           <h3>List Type: {list.type?.name}</h3>
         </header>
-        <div>
+        <div className="item-container">
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
