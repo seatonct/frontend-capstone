@@ -37,7 +37,7 @@ export const EditWishList = ({ currentUser }) => {
     };
 
     editList(updatedList).then(() => {
-      navigate("/lists/myLists");
+      navigate(`/lists/${wishList.id}`);
     });
   };
 

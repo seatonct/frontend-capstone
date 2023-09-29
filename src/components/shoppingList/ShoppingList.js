@@ -32,20 +32,16 @@ export const ShoppingList = ({ currentUser }) => {
             <Link to={`/items/${item.item.id}`} className="item-name">
               {item.item.name}
             </Link>
-            <span className="item-price">{item.item.price}</span>
+            <i
+              className="fa-solid fa-arrow-rotate-left"
+              onClick={async () => {
+                await deleteClaim(item);
+                await toggleItemUnclaimed(item.itemId);
+                getAndSetItems();
+              }}
+            ></i>
             <span className="item-list">
               From <Link to={`/lists/${item.list.id}`}>{item.list.name}</Link>
-            </span>
-            <span>
-              Undo Claim{" "}
-              <i
-                className="fa-solid fa-arrow-rotate-left"
-                onClick={async () => {
-                  await deleteClaim(item);
-                  await toggleItemUnclaimed(item.itemId);
-                  getAndSetItems();
-                }}
-              ></i>
             </span>
           </div>
         );
