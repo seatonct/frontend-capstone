@@ -14,9 +14,10 @@ export const saveNewItem = async (item) => {
   }).then((res) => res.json());
 };
 
-export const getItemById = async (itemId) => {
-  const res = await fetch(`http://localhost:8088/items/${itemId}`);
-  return await res.json();
+export const getItemById = (itemId) => {
+  return fetch(`http://localhost:8088/items/${itemId}?_expand=list`).then(
+    (res) => res.json()
+  );
 };
 
 export const editItem = async (item) => {

@@ -1,0 +1,29 @@
+h3 {
+  color: #f1faee;
+}
+
+.item-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item-img {
+  width: 15rem;
+  margin: 1rem;
+  box-shadow: 4px 3px 6px -1px grey;
+}
+
+.item-info-container {
+  border: 1px solid var(--outline);
+  background-color: #f1faee;
+  border-radius: 0.5rem;
+  height: 15rem;
+  width: 40rem;
+  margin: 1rem;
+  padding: 1rem 2rem;
+  box-shadow: 4px 3px 6px -1px grey;
+}
+
+.fa-pen-to-square {
+  margin-right: 1rem;
+}

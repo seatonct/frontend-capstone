@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getListById } from "../../services/wishListService";
 import {
   deleteItem,
@@ -80,30 +80,25 @@ export const ListDetails = ({ currentUser }) => {
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
-                <span className="item-name">{item.name}</span>
-                <span className="item-price">{item.price}</span>
+                <Link to={`/items/${item.id}`} className="item-name">
+                  {item.name}
+                </Link>
                 {item.claimed ? (
                   <div className="claim-icon-div">
-                    Claimed
                     {userClaims.find((claim) => claim.itemId === item.id) ? (
-                      <>
-                        <span> by you </span>
-                        <i
-                          className="fa-solid fa-rotate-left claim-icon"
-                          onClick={async () => {
-                            await deleteClaim(
-                              userClaims.find(
-                                (claim) => claim.itemId === item.id
-                              )
-                            );
-                            await toggleItemUnclaimed(item.id);
-                            await getAndSetUserClaims();
-                            getAndSetListItems();
-                          }}
-                        ></i>
-                      </>
+                      <i
+                        className="fa-solid fa-rotate-left claim-icon"
+                        onClick={async () => {
+                          await deleteClaim(
+                            userClaims.find((claim) => claim.itemId === item.id)
+                          );
+                          await toggleItemUnclaimed(item.id);
+                          await getAndSetUserClaims();
+                          getAndSetListItems();
+                        }}
+                      ></i>
                     ) : (
-                      <></>
+                      <i className="fa-solid fa-lock claim-icon"></i>
                     )}
                   </div>
                 ) : (
@@ -162,7 +157,6 @@ export const ListDetails = ({ currentUser }) => {
             return (
               <div className="item-div" key={item.id}>
                 <span className="item-name-viewer">{item.name}</span>
-                <span className="item-price-viewer">{item.price}</span>
                 {item.claimed ? (
                   <div className="claim-icon">
                     Claimed
