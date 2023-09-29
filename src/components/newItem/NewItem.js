@@ -84,7 +84,7 @@ export const NewItem = () => {
       </div>
       <div className="mb-3">
         <label htmlFor="storeUrl" className="form-label">
-          Product in Online Store URL:
+          Online Store URL:
         </label>
         <input
           id="storeUrl"

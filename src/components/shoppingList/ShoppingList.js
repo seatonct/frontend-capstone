@@ -29,7 +29,9 @@ export const ShoppingList = ({ currentUser }) => {
       {items.map((item) => {
         return (
           <div className="item-div" key={item.item.id}>
-            <span className="item-name">{item.item.name}</span>
+            <Link to={`/items/${item.item.id}`} className="item-name">
+              {item.item.name}
+            </Link>
             <span className="item-price">{item.item.price}</span>
             <span className="item-list">
               From <Link to={`/lists/${item.list.id}`}>{item.list.name}</Link>
