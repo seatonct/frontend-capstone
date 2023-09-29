@@ -14,22 +14,14 @@ h2 {
   justify-content: space-between;
 }
 
-.item-name {
-  width: 30%;
-}
-
-.item-price {
-  width: 5%;
-  margin-left: 5%;
+/* .item-name {
+  width: 60%;
 }
 
 .item-list {
-  width: 30%;
-  margin-left: 5%;
+  width: 35%;
 }
 
 .claim-icon {
-  width: 20%;
-  margin-left: 5%;
-  text-align: right;
-}
+  width: 5%;
+} */

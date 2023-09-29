@@ -1,10 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getItemById, deleteItem } from "../../services/itemService";
+import {
+  getItemById,
+  deleteItem,
+  toggleItemClaimed,
+  toggleItemUnclaimed,
+} from "../../services/itemService";
+import {
+  getClaimsByUserId,
+  deleteClaim,
+  createClaim,
+} from "../../services/claimService";
 import "./ItemDetails.css";
 
 export const ItemDetails = ({ currentUser }) => {
   const [item, setItem] = useState({});
+  const [userClaims, setUserClaims] = useState([]);
+  const [user, setUser] = useState({});
 
   const { itemId } = useParams();
   const navigate = useNavigate();
@@ -14,6 +26,19 @@ export const ItemDetails = ({ currentUser }) => {
       setItem(itemObj);
     });
   }, [itemId]);
+
+  useEffect(() => {
+    setUser(currentUser);
+  }, [currentUser]);
+
+  const getAndSetUserClaims = async () => {
+    const claimsArray = await getClaimsByUserId(user.id);
+    setUserClaims(claimsArray);
+  };
+
+  useEffect(() => {
+    getAndSetUserClaims();
+  }, [user]);
 
   return (
     <>
@@ -53,7 +78,41 @@ export const ItemDetails = ({ currentUser }) => {
           ) : (
             ""
           )}
-          {}
+          {item.claimed ? (
+            <>
+              {userClaims.find((claim) => claim.itemId === item.id) ? (
+                <i
+                  className="fa-solid fa-rotate-left claim-icon"
+                  onClick={async () => {
+                    await deleteClaim(
+                      userClaims.find((claim) => claim.itemId === item.id)
+                    );
+                    await toggleItemUnclaimed(item.id);
+                    await getAndSetUserClaims();
+                  }}
+                ></i>
+              ) : (
+                <i className="fa-solid fa-lock claim-icon"></i>
+              )}
+            </>
+          ) : (
+            <>
+              <i
+                className="fa-solid fa-cart-plus claim-icon"
+                onClick={async () => {
+                  const newClaim = {
+                    itemId: item.id,
+                    listId: parseInt(item.listId),
+                    userId: user.id,
+                  };
+
+                  await createClaim(newClaim);
+                  await toggleItemClaimed(item.id);
+                  getAndSetUserClaims();
+                }}
+              ></i>
+            </>
+          )}
           {currentUser.id === item.list?.userId && (
             <>
               <i

@@ -80,64 +80,68 @@ export const ListDetails = ({ currentUser }) => {
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
-                <Link to={`/items/${item.id}`} className="item-name">
-                  {item.name}
-                </Link>
-                {item.claimed ? (
-                  <div className="claim-icon-div">
-                    {userClaims.find((claim) => claim.itemId === item.id) ? (
+                <div className="item-name">
+                  <Link to={`/items/${item.id}`}>{item.name}</Link>
+                </div>
+                <div className="icons-container">
+                  {item.claimed ? (
+                    <div className="claim-icon-div">
+                      {userClaims.find((claim) => claim.itemId === item.id) ? (
+                        <i
+                          className="fa-solid fa-rotate-left claim-icon"
+                          onClick={async () => {
+                            await deleteClaim(
+                              userClaims.find(
+                                (claim) => claim.itemId === item.id
+                              )
+                            );
+                            await toggleItemUnclaimed(item.id);
+                            await getAndSetUserClaims();
+                            getAndSetListItems();
+                          }}
+                        ></i>
+                      ) : (
+                        <i className="fa-solid fa-lock claim-icon"></i>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="claim-icon-div">
                       <i
-                        className="fa-solid fa-rotate-left claim-icon"
+                        className="fa-solid fa-cart-plus claim-icon"
                         onClick={async () => {
-                          await deleteClaim(
-                            userClaims.find((claim) => claim.itemId === item.id)
-                          );
-                          await toggleItemUnclaimed(item.id);
-                          await getAndSetUserClaims();
-                          getAndSetListItems();
+                          const newClaim = {
+                            itemId: item.id,
+                            listId: parseInt(item.listId),
+                            userId: user.id,
+                          };
+
+                          await createClaim(newClaim);
+                          await toggleItemClaimed(item.id);
+                          getAndSetUserClaims().then(() => {
+                            getAndSetListItems();
+                          });
                         }}
                       ></i>
-                    ) : (
-                      <i className="fa-solid fa-lock claim-icon"></i>
-                    )}
-                  </div>
-                ) : (
-                  <div className="claim-icon-div">
-                    <i
-                      className="fa-solid fa-cart-plus claim-icon"
-                      onClick={async () => {
-                        const newClaim = {
-                          itemId: item.id,
-                          listId: parseInt(item.listId),
-                          userId: user.id,
-                        };
+                    </div>
+                  )}
 
-                        await createClaim(newClaim);
-                        await toggleItemClaimed(item.id);
-                        getAndSetUserClaims().then(() => {
-                          getAndSetListItems();
-                        });
+                  <div className="edit-icon-div">
+                    <i
+                      className="fa-solid fa-pen-to-square edit-icon"
+                      onClick={() => {
+                        navigate(`/items/${item.id}/edit`);
                       }}
                     ></i>
                   </div>
-                )}
-
-                <div className="edit-icon-div">
-                  <i
-                    className="fa-solid fa-pen-to-square edit-icon"
-                    onClick={() => {
-                      navigate(`/items/${item.id}/edit`);
-                    }}
-                  ></i>
-                </div>
-                <div className="delete-icon-div">
-                  <i
-                    className="fa-solid fa-trash delete-icon"
-                    onClick={async () => {
-                      await deleteItem(item);
-                      getAndSetListItems();
-                    }}
-                  ></i>
+                  <div className="delete-icon-div">
+                    <i
+                      className="fa-solid fa-trash delete-icon"
+                      onClick={async () => {
+                        await deleteItem(item);
+                        getAndSetListItems();
+                      }}
+                    ></i>
+                  </div>
                 </div>
               </div>
             );
@@ -150,7 +154,7 @@ export const ListDetails = ({ currentUser }) => {
       <div className="list-details">
         <header className="list-header">
           <h2>{list.name}</h2>
-          <h3>List Type: {list.type?.name}</h3>
+          <h3 className="list-type-header">List Type: {list.type?.name}</h3>
         </header>
         <div className="item-container">
           {listItems.map((item) => {
@@ -159,10 +163,8 @@ export const ListDetails = ({ currentUser }) => {
                 <span className="item-name-viewer">{item.name}</span>
                 {item.claimed ? (
                   <div className="claim-icon">
-                    Claimed
                     {userClaims.find((claim) => claim.itemId === item.id) ? (
                       <>
-                        <span> by you</span>
                         <i
                           className="fa-solid fa-rotate-left claim-icon"
                           onClick={async () => {
@@ -178,7 +180,7 @@ export const ListDetails = ({ currentUser }) => {
                         ></i>
                       </>
                     ) : (
-                      <></>
+                      <i className="fa-solid fa-lock"></i>
                     )}
                   </div>
                 ) : (
