@@ -27,15 +27,14 @@ export const ListDetails = ({ currentUser }) => {
     setUser(currentUser);
   }, [currentUser]);
 
-  const getAndSetListItems = async () => {
+  const getAndSetListItems = () => {
     getListById(listId).then((listObj) => {
       setList(listObj);
     });
   };
 
-  const getAndSetUserClaims = async () => {
-    const claimsArray = await getClaimsByUserId(user.id);
-    setUserClaims(claimsArray);
+  const getAndSetUserClaims = () => {
+    getClaimsByUserId(user.id).then((res) => setUserClaims(res));
   };
 
   useEffect(() => {
@@ -117,9 +116,8 @@ export const ListDetails = ({ currentUser }) => {
 
                           await createClaim(newClaim);
                           await toggleItemClaimed(item.id);
-                          getAndSetUserClaims().then(() => {
-                            getAndSetListItems();
-                          });
+                          await getAndSetUserClaims();
+                          getAndSetListItems();
                         }}
                       ></i>
                     </div>
@@ -160,7 +158,9 @@ export const ListDetails = ({ currentUser }) => {
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
-                <span className="item-name-viewer">{item.name}</span>
+                <Link to={`/items/${item.id}`} className="item-name-viewer">
+                  {item.name}
+                </Link>
                 {item.claimed ? (
                   <div className="claim-icon">
                     {userClaims.find((claim) => claim.itemId === item.id) ? (

@@ -1,10 +1,10 @@
-export const getListItems = async (list) => {
+export const getListItems = (list) => {
   return fetch(`http://localhost:8088/items?listId=${list.id}`).then((res) =>
     res.json()
   );
 };
 
-export const saveNewItem = async (item) => {
+export const saveNewItem = (item) => {
   return fetch(`http://localhost:8088/items`, {
     method: "POST",
     headers: {
@@ -20,7 +20,7 @@ export const getItemById = (itemId) => {
   );
 };
 
-export const editItem = async (item) => {
+export const editItem = (item) => {
   return fetch(`http://localhost:8088/items/${item.id}`, {
     method: "PUT",
     headers: {
@@ -36,7 +36,7 @@ export const deleteItem = (item) => {
   }).then((res) => res.json());
 };
 
-export const toggleItemClaimed = async (itemId) => {
+export const toggleItemClaimed = (itemId) => {
   return fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
@@ -49,8 +49,8 @@ export const toggleItemClaimed = async (itemId) => {
   }).then((res) => res.json());
 };
 
-export const toggleItemUnclaimed = async (itemId) => {
-  const res = await fetch(`http://localhost:8088/items/${itemId}`, {
+export const toggleItemUnclaimed = (itemId) => {
+  fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -59,7 +59,5 @@ export const toggleItemUnclaimed = async (itemId) => {
     body: JSON.stringify({
       claimed: false,
     }),
-  });
-
-  await res.json();
+  }).then((res) => res.json());
 };

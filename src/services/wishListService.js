@@ -1,8 +1,8 @@
-export const getAllListTypes = async () => {
+export const getAllListTypes = () => {
   return fetch(`http://localhost:8088/types`).then((res) => res.json());
 };
 
-export const saveNewList = async (list) => {
+export const saveNewList = (list) => {
   return fetch(`http://localhost:8088/lists`, {
     method: "POST",
     headers: {
@@ -12,19 +12,19 @@ export const saveNewList = async (list) => {
   }).then((res) => res.json());
 };
 
-export const getWishListsByUserId = async (userId) => {
+export const getWishListsByUserId = (userId) => {
   return fetch(
     `http://localhost:8088/lists?userId=${userId}&_expand=type`
   ).then((res) => res.json());
 };
 
-export const deleteList = async (list) => {
-  await fetch(`http://localhost:8088/lists/${list.id}`, {
+export const deleteList = (list) => {
+  fetch(`http://localhost:8088/lists/${list.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 };
 
-export const editList = async (list) => {
+export const editList = (list) => {
   return fetch(`http://localhost:8088/lists/${list.id}`, {
     method: "PUT",
     headers: {
@@ -34,7 +34,7 @@ export const editList = async (list) => {
   });
 };
 
-export const getListById = async (id) => {
+export const getListById = (id) => {
   return fetch(`http://localhost:8088/lists/${id}?_expand=type`).then((res) =>
     res.json()
   );
