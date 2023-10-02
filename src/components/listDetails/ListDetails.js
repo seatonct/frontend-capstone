@@ -27,13 +27,13 @@ export const ListDetails = ({ currentUser }) => {
     setUser(currentUser);
   }, [currentUser]);
 
-  const getAndSetListItems = () => {
+  const getAndSetListItems = async () => {
     getListById(listId).then((listObj) => {
       setList(listObj);
     });
   };
 
-  const getAndSetUserClaims = () => {
+  const getAndSetUserClaims = async () => {
     getClaimsByUserId(user.id).then((res) => setUserClaims(res));
   };
 
@@ -99,7 +99,7 @@ export const ListDetails = ({ currentUser }) => {
                                   )
                                 );
                                 await toggleItemUnclaimed(item.id);
-                                await getAndSetUserClaims();
+                                getAndSetUserClaims();
                                 getAndSetListItems();
                               }}
                             ></i>
@@ -120,7 +120,7 @@ export const ListDetails = ({ currentUser }) => {
 
                               await createClaim(newClaim);
                               await toggleItemClaimed(item.id);
-                              await getAndSetUserClaims();
+                              getAndSetUserClaims();
                               getAndSetListItems();
                             }}
                           ></i>
@@ -182,7 +182,7 @@ export const ListDetails = ({ currentUser }) => {
                               )
                             );
                             await toggleItemUnclaimed(item.id);
-                            await getAndSetUserClaims();
+                            getAndSetUserClaims();
                             getAndSetListItems();
                           }}
                         ></i>
@@ -204,7 +204,7 @@ export const ListDetails = ({ currentUser }) => {
 
                         await createClaim(newClaim);
                         await toggleItemClaimed(item.id);
-                        await getAndSetUserClaims();
+                        getAndSetUserClaims();
                         getAndSetListItems();
                       }}
                     ></i>

@@ -1,4 +1,4 @@
-export const createClaim = (claim) => {
+export const createClaim = async (claim) => {
   return fetch(`http://localhost:8088/claims`, {
     method: "POST",
     headers: {
@@ -14,7 +14,7 @@ export const getClaimsByUserId = async (userId) => {
   );
 };
 
-export const deleteClaim = (claim) => {
+export const deleteClaim = async (claim) => {
   return fetch(`http://localhost:8088/claims/${claim.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
