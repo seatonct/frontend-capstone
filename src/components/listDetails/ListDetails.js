@@ -204,9 +204,8 @@ export const ListDetails = ({ currentUser }) => {
 
                         await createClaim(newClaim);
                         await toggleItemClaimed(item.id);
-                        getAndSetUserClaims().then(() => {
-                          getAndSetListItems();
-                        });
+                        await getAndSetUserClaims();
+                        getAndSetListItems();
                       }}
                     ></i>
                   </div>
