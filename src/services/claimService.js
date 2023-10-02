@@ -1,5 +1,5 @@
 export const createClaim = async (claim) => {
-  await fetch(`http://localhost:8088/claims`, {
+  return fetch(`http://localhost:8088/claims`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const getClaimsByUserId = async (userId) => {
 };
 
 export const deleteClaim = async (claim) => {
-  await fetch(`http://localhost:8088/claims/${claim.id}`, {
+  return fetch(`http://localhost:8088/claims/${claim.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 };

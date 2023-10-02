@@ -32,13 +32,12 @@ export const ItemDetails = ({ currentUser }) => {
   }, [currentUser]);
 
   const getAndSetUserClaims = async () => {
-    const claimsArray = await getClaimsByUserId(user.id);
-    setUserClaims(claimsArray);
+    getClaimsByUserId(currentUser.id).then((res) => setUserClaims(res));
   };
 
   useEffect(() => {
     getAndSetUserClaims();
-  }, [user]);
+  }, []);
 
   return (
     <>
@@ -90,7 +89,7 @@ export const ItemDetails = ({ currentUser }) => {
                           userClaims.find((claim) => claim.itemId === item.id)
                         );
                         await toggleItemUnclaimed(item.id);
-                        await getAndSetUserClaims();
+                        getAndSetUserClaims();
                       }}
                     ></i>
                   ) : (
@@ -132,7 +131,7 @@ export const ItemDetails = ({ currentUser }) => {
                               )
                             );
                             await toggleItemUnclaimed(item.id);
-                            await getAndSetUserClaims();
+                            getAndSetUserClaims();
                           }}
                         ></i>
                       ) : (

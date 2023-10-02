@@ -31,12 +31,12 @@ export const editItem = (item) => {
 };
 
 export const deleteItem = (item) => {
-  return fetch(`http://localhost:8088/items/${item.id}`, {
+  fetch(`http://localhost:8088/items/${item.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 };
 
-export const toggleItemClaimed = (itemId) => {
+export const toggleItemClaimed = async (itemId) => {
   return fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
@@ -49,8 +49,8 @@ export const toggleItemClaimed = (itemId) => {
   }).then((res) => res.json());
 };
 
-export const toggleItemUnclaimed = (itemId) => {
-  fetch(`http://localhost:8088/items/${itemId}`, {
+export const toggleItemUnclaimed = async (itemId) => {
+  return fetch(`http://localhost:8088/items/${itemId}`, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
