@@ -19,7 +19,7 @@ export const getWishListsByUserId = async (userId) => {
 };
 
 export const deleteList = async (list) => {
-  fetch(`http://localhost:8088/lists/${list.id}`, {
+  await fetch(`http://localhost:8088/lists/${list.id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 };
