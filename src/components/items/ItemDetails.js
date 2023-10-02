@@ -78,56 +78,118 @@ export const ItemDetails = ({ currentUser }) => {
           ) : (
             ""
           )}
-          {item.claimed ? (
+          {user.id !== item.list?.userId ? (
             <>
-              {userClaims.find((claim) => claim.itemId === item.id) ? (
-                <i
-                  className="fa-solid fa-rotate-left claim-icon"
-                  onClick={async () => {
-                    await deleteClaim(
-                      userClaims.find((claim) => claim.itemId === item.id)
-                    );
-                    await toggleItemUnclaimed(item.id);
-                    await getAndSetUserClaims();
-                  }}
-                ></i>
+              {item.claimed ? (
+                <>
+                  {userClaims.find((claim) => claim.itemId === item.id) ? (
+                    <i
+                      className="fa-solid fa-rotate-left claim-icon"
+                      onClick={async () => {
+                        await deleteClaim(
+                          userClaims.find((claim) => claim.itemId === item.id)
+                        );
+                        await toggleItemUnclaimed(item.id);
+                        await getAndSetUserClaims();
+                      }}
+                    ></i>
+                  ) : (
+                    <i className="fa-solid fa-lock claim-icon"></i>
+                  )}
+                </>
               ) : (
-                <i className="fa-solid fa-lock claim-icon"></i>
+                <>
+                  <i
+                    className="fa-solid fa-cart-plus claim-icon"
+                    onClick={async () => {
+                      const newClaim = {
+                        itemId: item.id,
+                        listId: parseInt(item.listId),
+                        userId: user.id,
+                      };
+
+                      await createClaim(newClaim);
+                      await toggleItemClaimed(item.id);
+                      getAndSetUserClaims();
+                    }}
+                  ></i>
+                </>
               )}
             </>
           ) : (
             <>
-              <i
-                className="fa-solid fa-cart-plus claim-icon"
-                onClick={async () => {
-                  const newClaim = {
-                    itemId: item.id,
-                    listId: parseInt(item.listId),
-                    userId: user.id,
-                  };
+              {item.list?.forSelf === false ? (
+                <>
+                  {item.claimed ? (
+                    <>
+                      {userClaims.find((claim) => claim.itemId === item.id) ? (
+                        <i
+                          className="fa-solid fa-rotate-left claim-icon"
+                          onClick={async () => {
+                            await deleteClaim(
+                              userClaims.find(
+                                (claim) => claim.itemId === item.id
+                              )
+                            );
+                            await toggleItemUnclaimed(item.id);
+                            await getAndSetUserClaims();
+                          }}
+                        ></i>
+                      ) : (
+                        <i className="fa-solid fa-lock claim-icon"></i>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <i
+                        className="fa-solid fa-cart-plus claim-icon"
+                        onClick={async () => {
+                          const newClaim = {
+                            itemId: item.id,
+                            listId: parseInt(item.listId),
+                            userId: user.id,
+                          };
 
-                  await createClaim(newClaim);
-                  await toggleItemClaimed(item.id);
-                  getAndSetUserClaims();
-                }}
-              ></i>
-            </>
-          )}
-          {currentUser.id === item.list?.userId && (
-            <>
-              <i
-                className="fa-solid fa-pen-to-square"
-                onClick={() => {
-                  navigate(`/items/${item.id}/edit`);
-                }}
-              ></i>
-              <i
-                className="fa-solid fa-trash"
-                onClick={async () => {
-                  await deleteItem(item);
-                  navigate(`/lists/${item.list.id}`);
-                }}
-              ></i>
+                          await createClaim(newClaim);
+                          await toggleItemClaimed(item.id);
+                          getAndSetUserClaims();
+                        }}
+                      ></i>
+                    </>
+                  )}
+                  <>
+                    <i
+                      className="fa-solid fa-pen-to-square"
+                      onClick={() => {
+                        navigate(`/items/${item.id}/edit`);
+                      }}
+                    ></i>
+                    <i
+                      className="fa-solid fa-trash"
+                      onClick={async () => {
+                        await deleteItem(item);
+                        navigate(`/lists/${item.list.id}`);
+                      }}
+                    ></i>
+                  </>
+                </>
+              ) : (
+                <>
+                  <i
+                    className="fa-solid fa-pen-to-square"
+                    onClick={() => {
+                      navigate(`/items/${item.id}/edit`);
+                    }}
+                  ></i>
+                  <i
+                    className="fa-solid fa-trash"
+                    onClick={async () => {
+                      await deleteItem(item);
+                      navigate(`/lists/${item.list.id}`);
+                    }}
+                  ></i>
+                </>
+              )}
             </>
           )}
         </div>
