@@ -7,14 +7,9 @@ import { Link } from "react-router-dom";
 import "./MyLists.css";
 
 export const MyLists = ({ currentUser }) => {
-  // const [user, setUser] = useState({});
   const [myLists, setMyLists] = useState([]);
 
-  // useEffect(() => {
-  //   setUser(currentUser);
-  // }, [currentUser]);
-
-  const getAndSetMyLists = () => {
+  const getAndSetMyLists = async () => {
     getWishListsByUserId(currentUser.id).then((listsArray) => {
       setMyLists(listsArray);
     });
@@ -34,12 +29,12 @@ export const MyLists = ({ currentUser }) => {
               <Link className="list-name" to={`/lists/${listObj.id}`}>
                 {listObj.name}
               </Link>
-              <span className="list-type">Type: {listObj.type.name} List</span>
+              <span className="list-type">Type: {listObj.type?.name} List</span>
               <span className="delete-btn-div">
                 <i
                   className="fa-solid fa-trash delete-btn"
-                  onClick={() => {
-                    deleteList(listObj);
+                  onClick={async () => {
+                    await deleteList(listObj);
                     getAndSetMyLists();
                   }}
                 ></i>

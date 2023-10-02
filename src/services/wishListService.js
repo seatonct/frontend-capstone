@@ -12,13 +12,13 @@ export const saveNewList = (list) => {
   }).then((res) => res.json());
 };
 
-export const getWishListsByUserId = (userId) => {
+export const getWishListsByUserId = async (userId) => {
   return fetch(
     `http://localhost:8088/lists?userId=${userId}&_expand=type`
   ).then((res) => res.json());
 };
 
-export const deleteList = (list) => {
+export const deleteList = async (list) => {
   fetch(`http://localhost:8088/lists/${list.id}`, {
     method: "DELETE",
   }).then((res) => res.json());

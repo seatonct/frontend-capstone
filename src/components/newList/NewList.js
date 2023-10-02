@@ -9,7 +9,9 @@ export const NewList = ({ currentUser }) => {
     name: "",
     typeId: 0,
     userId: 0,
+    forSelf: false,
   });
+  const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,6 +20,10 @@ export const NewList = ({ currentUser }) => {
       setListTypes(typesArray);
     });
   }, []);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   const updateList = (evt) => {
     const copy = { ...wishList };
@@ -30,6 +36,7 @@ export const NewList = ({ currentUser }) => {
     event.preventDefault();
     const listCopy = { ...wishList };
     listCopy.typeId = parseInt(listCopy.typeId);
+    listCopy.forSelf = checked;
     saveNewList(listCopy);
     navigate("/lists/myLists");
   };
@@ -71,10 +78,21 @@ export const NewList = ({ currentUser }) => {
             );
           })}
         </select>
-        <button type="button submit" className="btn btn-primary btn-lg">
-          Create List
-        </button>
       </div>
+      <div>
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            id="forSelf"
+            value={checked}
+            onChange={handleChange}
+          />
+          This list is for myself.
+        </label>
+      </div>
+      <button type="button submit" className="btn btn-primary btn-lg">
+        Create List
+      </button>
     </form>
   );
 };
