@@ -34,6 +34,7 @@ export const EditWishList = ({ currentUser }) => {
       name: wishList.name,
       typeId: wishList.typeId,
       userId: wishList.userId,
+      forSelf: wishList.forSelf,
     };
 
     editList(updatedList).then(() => {
@@ -90,10 +91,27 @@ export const EditWishList = ({ currentUser }) => {
             );
           })}
         </select>
-        <button type="button submit" className="btn btn-primary btn-lg">
-          Save Changes
-        </button>
       </div>
+      <div>
+        <label className="checkbox-label">
+          <input
+            name="forSelf"
+            type="checkbox"
+            id="forSelf"
+            checked={wishList.forSelf ? true : false}
+            value={wishList.forSelf ? true : false}
+            onChange={(event) => {
+              const listCopy = { ...wishList };
+              listCopy.forSelf = !wishList.forSelf;
+              setWishList(listCopy);
+            }}
+          />
+          This list is for myself.
+        </label>
+      </div>
+      <button type="button submit" className="btn btn-primary btn-lg">
+        Save Changes
+      </button>
     </form>
   );
 };

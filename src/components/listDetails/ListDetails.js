@@ -83,44 +83,52 @@ export const ListDetails = ({ currentUser }) => {
                   <Link to={`/items/${item.id}`}>{item.name}</Link>
                 </div>
                 <div className="icons-container">
-                  {item.claimed ? (
-                    <div className="claim-icon-div">
-                      {userClaims.find((claim) => claim.itemId === item.id) ? (
-                        <i
-                          className="fa-solid fa-rotate-left claim-icon"
-                          onClick={async () => {
-                            await deleteClaim(
-                              userClaims.find(
-                                (claim) => claim.itemId === item.id
-                              )
-                            );
-                            await toggleItemUnclaimed(item.id);
-                            await getAndSetUserClaims();
-                            getAndSetListItems();
-                          }}
-                        ></i>
+                  {list.forSelf === false ? (
+                    <>
+                      {item.claimed ? (
+                        <div className="claim-icon-div">
+                          {userClaims.find(
+                            (claim) => claim.itemId === item.id
+                          ) ? (
+                            <i
+                              className="fa-solid fa-rotate-left claim-icon"
+                              onClick={async () => {
+                                await deleteClaim(
+                                  userClaims.find(
+                                    (claim) => claim.itemId === item.id
+                                  )
+                                );
+                                await toggleItemUnclaimed(item.id);
+                                await getAndSetUserClaims();
+                                getAndSetListItems();
+                              }}
+                            ></i>
+                          ) : (
+                            <i className="fa-solid fa-lock claim-icon"></i>
+                          )}
+                        </div>
                       ) : (
-                        <i className="fa-solid fa-lock claim-icon"></i>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="claim-icon-div">
-                      <i
-                        className="fa-solid fa-cart-plus claim-icon"
-                        onClick={async () => {
-                          const newClaim = {
-                            itemId: item.id,
-                            listId: parseInt(item.listId),
-                            userId: user.id,
-                          };
+                        <div className="claim-icon-div">
+                          <i
+                            className="fa-solid fa-cart-plus claim-icon"
+                            onClick={async () => {
+                              const newClaim = {
+                                itemId: item.id,
+                                listId: parseInt(item.listId),
+                                userId: user.id,
+                              };
 
-                          await createClaim(newClaim);
-                          await toggleItemClaimed(item.id);
-                          await getAndSetUserClaims();
-                          getAndSetListItems();
-                        }}
-                      ></i>
-                    </div>
+                              await createClaim(newClaim);
+                              await toggleItemClaimed(item.id);
+                              await getAndSetUserClaims();
+                              getAndSetListItems();
+                            }}
+                          ></i>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    ""
                   )}
 
                   <div className="edit-icon-div">
