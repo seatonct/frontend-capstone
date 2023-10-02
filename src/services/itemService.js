@@ -1,7 +1,7 @@
 export const getListItems = (list) => {
-  return fetch(`http://localhost:8088/items?listId=${list.id}`).then((res) =>
-    res.json()
-  );
+  return fetch(
+    `http://localhost:8088/items?listId=${list.id}&_expand=list`
+  ).then((res) => res.json());
 };
 
 export const saveNewItem = (item) => {
