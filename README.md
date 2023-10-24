@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+WHAT GIFTGRABBER DOES:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GiftGrabber allows a user to create, edit, and delete wish lists.
 
-## Available Scripts
+Users can add items (at least the name of the item) to lists they create and may include a description, price, picture url, and online store url for the item.
 
-In the project directory, you can run:
+Users can edit and delete items from lists they created but not from other users' lists.
 
-### `npm start`
+Users can search for lists created by another user by searching that user's email address.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Users can view lists and item details added by other users but may not alter or delete them.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Users can claim items in any list to purchase and give to the list's subject.
 
-### `npm test`
+All items a user has claimed from any list may be viewed in the user's shopping list.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A claim a user has made on an item can be undone by that user.
 
-### `npm run build`
+Items already claimed by a user may not be claimed by any other user.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If the user created a wishlist for themself, items in the list do not display claim options or information.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+WHY GIFTGRABBER IS USEFUL:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Gift grabber allows users to easily share with others items list subjects would like to receive for Christmas, Birthdays, etc.
 
-### `npm run eject`
+The claim feature ensures that an item will only be purchased by a single gift-giver, eliminating duplicate gifts.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A user can also make a wishlist for themself without inadvertently finding out which items they will be receiving, thus maintaining some element of surprise.
