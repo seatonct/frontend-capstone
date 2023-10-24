@@ -27,3 +27,11 @@ Gift grabber allows users to easily share with others items list subjects would 
 The claim feature ensures that an item will only be purchased by a single gift-giver, eliminating duplicate gifts.
 
 A user can also make a wishlist for themself without inadvertently finding out which items they will be receiving, thus maintaining some element of surprise.
+
+TO TEST:
+
+Go to the repository at the following url, and follow the instructions to set up and start the json server: https://github.com/seatonct/gift-grabber-demo-api/tree/main.
+
+Clone this repository, and cd to the directory in your terminal.
+
+Run the following command in the directory to launch the app: npm start.
