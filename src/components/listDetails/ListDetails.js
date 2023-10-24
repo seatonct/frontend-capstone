@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getListById } from "../../services/wishListService";
-import {
-  deleteItem,
-  getListItems,
-  toggleItemClaimed,
-  toggleItemUnclaimed,
-} from "../../services/itemService";
+import { deleteItem, getListItems } from "../../services/itemService";
 import "./ListDetails.css";
 import {
   createClaim,
+  getAllClaims,
   getClaimsByUserId,
   deleteClaim,
 } from "../../services/claimService";
@@ -17,24 +13,25 @@ import {
 export const ListDetails = ({ currentUser }) => {
   const [list, setList] = useState({});
   const [listItems, setListItems] = useState([]);
+  const [allClaims, setAllClaims] = useState([]);
   const [userClaims, setUserClaims] = useState([]);
-  const [user, setUser] = useState({});
 
   const { listId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setUser(currentUser);
-  }, [currentUser]);
-
   const getAndSetListItems = async () => {
-    getListById(listId).then((listObj) => {
-      setList(listObj);
-    });
+    const listObj = await getListById(listId);
+    setList(listObj);
+  };
+
+  const getAndSetAllClaims = async () => {
+    const claimsArray = await getAllClaims();
+    setAllClaims(claimsArray);
   };
 
   const getAndSetUserClaims = async () => {
-    getClaimsByUserId(user.id).then((res) => setUserClaims(res));
+    const res = await getClaimsByUserId(currentUser.id);
+    setUserClaims(res);
   };
 
   useEffect(() => {
@@ -48,11 +45,17 @@ export const ListDetails = ({ currentUser }) => {
   }, [list]);
 
   useEffect(() => {
+    getAndSetAllClaims();
+  }, [list]);
+
+  useEffect(() => {
     getAndSetUserClaims();
   }, [listItems]);
 
-  if (user.id === list.userId) {
+  // If the list was created by the user...
+  if (currentUser.id === list.userId) {
     return (
+      // Display list name with Edit List button.
       <div className="list-details">
         <h2>
           {list.name}{" "}
@@ -63,7 +66,9 @@ export const ListDetails = ({ currentUser }) => {
             }}
           ></i>
         </h2>
+        {/* Display list type. */}
         <h3>List Type: {list.type?.name}</h3>
+        {/* Display Add New Item button. */}
         <div className="btn-div">
           <button
             type="button"
@@ -76,6 +81,7 @@ export const ListDetails = ({ currentUser }) => {
           </button>
         </div>
         <div>
+          {/* Display each item in the list. */}
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
@@ -83,13 +89,17 @@ export const ListDetails = ({ currentUser }) => {
                   <Link to={`/items/${item.id}`}>{item.name}</Link>
                 </div>
                 <div className="icons-container">
+                  {/* If the user created the list for someone other than themself... */}
                   {list.forSelf === false ? (
                     <>
-                      {item.claimed ? (
+                      {/* Is the item claimed? */}
+                      {allClaims.find((obj) => obj.itemId === item.id) ? (
                         <div className="claim-icon-div">
-                          {userClaims.find(
+                          {/* If so, did the user claim the item? */}
+                          {userClaims?.find(
                             (claim) => claim.itemId === item.id
                           ) ? (
+                            // If so, display the Unclaim button.
                             <i
                               className="fa-solid fa-rotate-left claim-icon"
                               onClick={async () => {
@@ -98,16 +108,18 @@ export const ListDetails = ({ currentUser }) => {
                                     (claim) => claim.itemId === item.id
                                   )
                                 );
-                                await toggleItemUnclaimed(item.id);
-                                getAndSetUserClaims();
-                                getAndSetListItems();
+                                await getAndSetAllClaims();
+                                await getAndSetUserClaims();
+                                await getAndSetListItems();
                               }}
                             ></i>
                           ) : (
+                            // If the item is claimed by another user, display the lock icon.
                             <i className="fa-solid fa-lock claim-icon"></i>
                           )}
                         </div>
                       ) : (
+                        // If the item is not claimed display the Claim button.
                         <div className="claim-icon-div">
                           <i
                             className="fa-solid fa-cart-plus claim-icon"
@@ -115,22 +127,23 @@ export const ListDetails = ({ currentUser }) => {
                               const newClaim = {
                                 itemId: item.id,
                                 listId: parseInt(item.listId),
-                                userId: user.id,
+                                userId: currentUser.id,
                               };
 
                               await createClaim(newClaim);
-                              await toggleItemClaimed(item.id);
-                              getAndSetUserClaims();
-                              getAndSetListItems();
+                              await getAndSetAllClaims();
+                              await getAndSetUserClaims();
+                              await getAndSetListItems();
                             }}
                           ></i>
                         </div>
                       )}
                     </>
                   ) : (
+                    // If the user created the list for themself, don't display Claim buttons.
                     ""
                   )}
-
+                  {/* Display Edit Item button. */}
                   <div className="edit-icon-div">
                     <i
                       className="fa-solid fa-pen-to-square edit-icon"
@@ -139,12 +152,13 @@ export const ListDetails = ({ currentUser }) => {
                       }}
                     ></i>
                   </div>
+                  {/* Display Delete Item button. */}
                   <div className="delete-icon-div">
                     <i
                       className="fa-solid fa-trash delete-icon"
                       onClick={async () => {
-                        await deleteItem(item);
-                        getAndSetListItems();
+                        deleteItem(item);
+                        await getAndSetListItems();
                       }}
                     ></i>
                   </div>
@@ -156,22 +170,28 @@ export const ListDetails = ({ currentUser }) => {
       </div>
     );
   } else {
+    // If the user did not create the list.
     return (
+      // Display list name and list type.
       <div className="list-details">
         <header className="list-header">
           <h2>{list.name}</h2>
           <h3 className="list-type-header">List Type: {list.type?.name}</h3>
         </header>
         <div className="item-container">
+          {/* Display each item in the list. */}
           {listItems.map((item) => {
             return (
               <div className="item-div" key={item.id}>
                 <Link to={`/items/${item.id}`} className="item-name-viewer">
                   {item.name}
                 </Link>
-                {item.claimed ? (
+                {/* Is the item claimed? */}
+                {allClaims.find((obj) => obj.itemId === item.id) ? (
                   <div className="claim-icon">
+                    {/* If so, did the user claim the item? */}
                     {userClaims.find((claim) => claim.itemId === item.id) ? (
+                      // If so, display the Unclaim button.
                       <>
                         <i
                           className="fa-solid fa-rotate-left claim-icon"
@@ -181,17 +201,19 @@ export const ListDetails = ({ currentUser }) => {
                                 (claim) => claim.itemId === item.id
                               )
                             );
-                            await toggleItemUnclaimed(item.id);
-                            getAndSetUserClaims();
-                            getAndSetListItems();
+                            await getAndSetAllClaims();
+                            await getAndSetUserClaims();
+                            await getAndSetListItems();
                           }}
                         ></i>
                       </>
                     ) : (
+                      // If the item is claimed by another user, display the lock icon.
                       <i className="fa-solid fa-lock"></i>
                     )}
                   </div>
                 ) : (
+                  // If the item is not claimed, display the Claim button.
                   <div className="claim-icon">
                     <i
                       className="fa-solid fa-cart-plus claim-icon"
@@ -199,13 +221,13 @@ export const ListDetails = ({ currentUser }) => {
                         const newClaim = {
                           itemId: item.id,
                           listId: parseInt(item.listId),
-                          userId: user.id,
+                          userId: currentUser.id,
                         };
 
                         await createClaim(newClaim);
-                        await toggleItemClaimed(item.id);
-                        getAndSetUserClaims();
-                        getAndSetListItems();
+                        await getAndSetAllClaims();
+                        await getAndSetUserClaims();
+                        await getAndSetListItems();
                       }}
                     ></i>
                   </div>

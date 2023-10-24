@@ -11,7 +11,6 @@ export const NewItem = () => {
     imageUrl: "",
     storeUrl: "",
     listId: 0,
-    claimed: false,
   });
 
   const { listId } = useParams();
