@@ -34,6 +34,6 @@ Go to the repository at the following url, and follow the instructions to set up
 
 Clone this repository, and cd to the directory in your terminal.
 
-Run the following command in the directory to launch the app: 
-npm install
+Run the following commands in the directory to launch the app: 
+npm install \n
 npm start
