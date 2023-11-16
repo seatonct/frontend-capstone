@@ -28,9 +28,15 @@ The claim feature ensures that an item will only be purchased by a single gift-g
 
 A user can also make a wishlist for themself without inadvertently finding out which items they will be receiving, thus maintaining some element of surprise.
 
-WIREFRAME: 
+WIREFRAME(MVP): https://miro.com/app/board/uXjVMnccXdg=/
 
-<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMmPEixQ=/?moveToViewport=-84,-970,6778,3046&embedId=813793611703" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+ERD (MVP): https://dbdiagram.io/d/FrontendCapstoneE-64fb630402bd1c4a5e3ade80
+
+WIREFRAME(Stretch): https://miro.com/app/board/uXjVMmPEixQ=/
+
+ERD(Stretch): https://dbdiagram.io/d/GiftGrabberStretch-650c5eab02bd1c4a5e06a980
+
+Video Demo: https://www.loom.com/share/1de93fbb48b7483bb15cf6ca412f2ced?sid=222ed419-9336-4a97-9ae1-b86842b8e077
 
 TO TEST:
 
