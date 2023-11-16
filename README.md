@@ -28,6 +28,10 @@ The claim feature ensures that an item will only be purchased by a single gift-g
 
 A user can also make a wishlist for themself without inadvertently finding out which items they will be receiving, thus maintaining some element of surprise.
 
+WIREFRAME: 
+
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMmPEixQ=/?moveToViewport=-84,-970,6778,3046&embedId=813793611703" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
 TO TEST:
 
 Go to the repository at the following url, and follow the instructions to set up and start the json server: https://github.com/seatonct/gift-grabber-demo-api/tree/main.
