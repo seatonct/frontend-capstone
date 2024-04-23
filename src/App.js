@@ -7,6 +7,7 @@ import { ApplicationViews } from "./views/ApplicationViews";
 import { Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { tryGetLoggedInUser } from "./services/userService";
+import { NavBar } from "./components/nav/NavBar";
 
 export const App = () => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -23,18 +24,26 @@ export const App = () => {
     return <Spinner />;
   }
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-
-      <Route
-        path="*"
-        element={
-          <Authorized>
-            <ApplicationViews />
-          </Authorized>
-        }
+    <>
+      <NavBar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <ApplicationViews
+        loggedInUser={loggedInUser}
+        setLoggedInUser={setLoggedInUser}
       />
-    </Routes>
+    </>
+
+    // <Routes>
+    //   <Route path="/login" element={<Login />} />
+    //   <Route path="/register" element={<Register />} />
+
+    //   <Route
+    //     path="*"
+    //     element={
+    //       <Authorized>
+    //         <ApplicationViews />
+    //       </Authorized>
+    //     }
+    //   />
+    // </Routes>
   );
 };

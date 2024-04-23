@@ -1,9 +1,7 @@
 import { Route, Routes, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Welcome } from "../components/welcome/Welcome";
 import { NewList } from "../components/newList/NewList";
 import { MyLists } from "../components/myLists/MyLists";
-import { NavBar } from "../components/nav/NavBar";
 import { EditWishList } from "../components/editList/EditList";
 import { ListDetails } from "../components/listDetails/ListDetails";
 import { NewItem } from "../components/newItem/NewItem";
@@ -11,46 +9,37 @@ import { EditItem } from "../components/editItem/EditItem";
 import { FindList } from "../components/findList/FindList";
 import { ShoppingList } from "../components/shoppingList/ShoppingList";
 import { ItemDetails } from "../components/items/ItemDetails";
+import { AuthorizedRoute } from "../components/auth/AuthorizedRoute";
 
-export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    const localGiftUser = localStorage.getItem("gift_user");
-    const giftUserObj = JSON.parse(localGiftUser);
-
-    setCurrentUser(giftUserObj);
-  }, []);
-
+export const ApplicationViews = ({ loggedInUser, setLoggedInUser }) => {
   return (
     <>
       <Routes>
         <Route
           path="/"
           element={
-            <>
-              <NavBar />
+            <AuthorizedRoute>
               <Outlet />
-            </>
+            </AuthorizedRoute>
           }
         >
           <Route index element={<Welcome />} />
           <Route path="lists">
             <Route
               path="newWishList"
-              element={<NewList currentUser={currentUser} />}
+              element={<NewList currentUser={loggedInUser} />}
             />
             <Route
               path="myLists"
-              element={<MyLists currentUser={currentUser} />}
+              element={<MyLists currentUser={loggedInUser} />}
             />
             <Route
               path=":listId"
-              element={<ListDetails currentUser={currentUser} />}
+              element={<ListDetails currentUser={loggedInUser} />}
             />
             <Route
               path=":listId/edit"
-              element={<EditWishList currentUser={currentUser} />}
+              element={<EditWishList currentUser={loggedInUser} />}
             />
             <Route path=":listId/newItem" element={<NewItem />} />
             <Route path="findList" element={<FindList />} />
@@ -58,13 +47,13 @@ export const ApplicationViews = () => {
           <Route path="items">
             <Route
               path=":itemId"
-              element={<ItemDetails currentUser={currentUser} />}
+              element={<ItemDetails currentUser={loggedInUser} />}
             />
             <Route path=":itemId/edit" element={<EditItem />} />
           </Route>
           <Route
             path="/shoppingList"
-            element={<ShoppingList currentUser={currentUser} />}
+            element={<ShoppingList currentUser={loggedInUser} />}
           ></Route>
         </Route>
       </Routes>

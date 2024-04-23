@@ -17,10 +17,10 @@ export const createUser = (user) => {
   }).then((res) => res.json());
 };
 
-export const login = (email, password) => {
+export const loginUser = (email, password) => {
   return fetch("http://localhost:5000/api/Auth/login", {
     method: "POST",
-    credentials: "same-origin",
+    // credentials: "same-origin",
     headers: {
       Authorization: `Basic ${btoa(`${email}:${password}`)}`,
     },

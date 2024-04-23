@@ -2,28 +2,24 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { getUserByEmail } from "../../services/userService";
+import { getUserByEmail, login } from "../../services/userService";
+import { loginUser } from "../../services/userService";
 
-export const Login = () => {
-  const [email, set] = useState("");
+export const Login = ({ setLoggedInUser }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const [failedLogin, setFailedLogin] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    return getUserByEmail(email).then((foundUsers) => {
-      if (foundUsers.length === 1) {
-        const user = foundUsers[0];
-        localStorage.setItem(
-          "gift_user",
-          JSON.stringify({
-            id: user.id,
-          })
-        );
-
-        navigate("/");
-      } else {
+    loginUser(username, password).then((user) => {
+      if (!user) {
+        // setFailedLogin(true);
         window.alert("Invalid login");
+      } else {
+        navigate("/");
       }
     });
   };
@@ -37,11 +33,24 @@ export const Login = () => {
           <fieldset className="auth-fieldset">
             <div>
               <input
-                type="email"
-                value={email}
+                type="username"
+                value={username}
                 className="auth-form-input"
-                onChange={(evt) => set(evt.target.value)}
-                placeholder="Email address"
+                onChange={(evt) => setUsername(evt.target.value)}
+                placeholder="Username"
+                required
+                autoFocus
+              />
+            </div>
+          </fieldset>
+          <fieldset className="auth-fieldset">
+            <div>
+              <input
+                type="password"
+                value={password}
+                className="auth-form-input"
+                onChange={(evt) => setPassword(evt.target.value)}
+                placeholder="Password"
                 required
                 autoFocus
               />
