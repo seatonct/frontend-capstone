@@ -24,13 +24,10 @@ export const App = () => {
     return <Spinner />;
   }
   return (
-    <>
-      <NavBar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
-      <ApplicationViews
-        loggedInUser={loggedInUser}
-        setLoggedInUser={setLoggedInUser}
-      />
-    </>
+    <ApplicationViews
+      loggedInUser={loggedInUser}
+      setLoggedInUser={setLoggedInUser}
+    />
 
     // <Routes>
     //   <Route path="/login" element={<Login />} />

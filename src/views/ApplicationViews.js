@@ -10,15 +10,21 @@ import { FindList } from "../components/findList/FindList";
 import { ShoppingList } from "../components/shoppingList/ShoppingList";
 import { ItemDetails } from "../components/items/ItemDetails";
 import { AuthorizedRoute } from "../components/auth/AuthorizedRoute";
+import { Login } from "../components/auth/Login";
+import { Register } from "../components/auth/Register";
+import { NavBar } from "../components/nav/NavBar";
 
 export const ApplicationViews = ({ loggedInUser, setLoggedInUser }) => {
   return (
     <>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/"
           element={
             <AuthorizedRoute>
+              <NavBar currentUser={loggedInUser} />
               <Outlet />
             </AuthorizedRoute>
           }
