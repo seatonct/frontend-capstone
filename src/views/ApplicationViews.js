@@ -18,7 +18,10 @@ export const ApplicationViews = ({ loggedInUser, setLoggedInUser }) => {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login setLoggedInUser={setLoggedInUser} />}
+        />
         <Route path="/register" element={<Register />} />
         <Route
           path="/"

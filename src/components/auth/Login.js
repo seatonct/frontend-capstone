@@ -19,6 +19,7 @@ export const Login = ({ setLoggedInUser }) => {
         // setFailedLogin(true);
         window.alert("Invalid login");
       } else {
+        setLoggedInUser(user);
         navigate("/");
       }
     });
